@@ -2,6 +2,7 @@ import { Link } from 'react-router';
 import {
   House,
   Compass,
+  Newspaper,
   Users,
   BuildingComplex,
   FaceSlightlySmiling,
@@ -12,9 +13,10 @@ import {
 function NavBar({ isDarkMode, onToggleTheme }) {
 
   const links = [
-    { name: 'Home', href: '/', icon: <House /> },
-    { name: 'Explore', href: '/Explore', icon: <Compass strokeWidth={1.5} /> },
-    { name: 'Friends', href: '/Friends', icon: <Users strokeWidth={1.5} /> },
+    { name: 'Welcome', href: '/', icon: <House /> },
+    { name: 'Feed', href: '/home', icon: <Newspaper strokeWidth={1.5} /> },
+    { name: 'Explore', href: '/explore', icon: <Compass strokeWidth={1.5} /> },
+    { name: 'Friends', href: '/friends', icon: <Users strokeWidth={1.5} /> },
     { name: 'Lifestyle', href: '/BayelsaLife', icon: <BuildingComplex strokeWidth={1.5} /> },
     { name: 'Me', href: '/Me', icon: <FaceSlightlySmiling strokeWidth={1.5} /> },
   ];

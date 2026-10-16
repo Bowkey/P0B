@@ -15,6 +15,7 @@ function Home() {
         <Button><Bell /></Button>
       </div>
       <TabsComponent />
+      
     </>
 
 

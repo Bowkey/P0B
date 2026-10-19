@@ -8,6 +8,7 @@ import Explore from './pages/Explore/Explore.jsx';
 import Me from './pages/Me/Me.jsx';
 import Friends from './pages/Friends/Friends.jsx';
 import BayelsaLife from './pages/BayelsaLife/BayelsaLife.jsx';
+import SignIn from './auth/SignIn.jsx';
 
 function App() {
   const { pathname } = useLocation();
@@ -39,6 +40,7 @@ function App() {
 
         <Route path="/BayelsaLife" element={<BayelsaLife />} />
         <Route path="/me" element={<Me />} />
+        <Route path="/signin" element={<SignIn />} />
 
       </Routes>
 

@@ -10,13 +10,15 @@ import {
   Users,
   Toolbox,
   Houses,
+  Menu,
   Moon,
   Sun,
+  X,
 } from 'lucide-react';
+import { useState } from 'react';
 import { Link } from 'react-router';
-
+import mainLogo from '/logo.png'
 import Faq from './Faq.jsx';
-
 const destinations = [
   {
     title: 'What’s happening',
@@ -66,57 +68,109 @@ const destinations = [
 ];
 
 function Landing({ isDarkMode, onToggleTheme }) {
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+
   return (
-    <main className="overflow-hidden pb-28">
-      <header className="mx-auto flex max-w-7xl items-center justify-between px-5 py-5 sm:px-8">
-        <Link to="/" className="flex items-center gap-2.5" aria-label="People of Bayelsa home">
-          <span className="grid size-10 place-items-center rounded-2xl bg-teal-700 text-white">
-{/* 
-            <image
-              alt="logo"
-              src={logoImage}
-            /> */}
+    <main className="overflow-x-clip pb-28">
+      <header className="sticky -top-2 z-50 mx-auto max-w-7xl bg-background/95 px-5 py-2 backdrop-blur sm:px-8">
+        <div className="flex items-center justify-between">
+          <Link to="/" className="flex items-center gap-2.5" aria-label="People of Bayelsa home">
+            <div className="grid size-10 place-items-center rounded-2xl text-white">
+
+              <img
+                alt="logo"
+                src={mainLogo}
+              />
 
 
 
-            {/* <Waves size={21} aria-hidden="true" /> */}
-          </span>
-          <span className="text-sm font-black leading-tight tracking-wide text-teal-950 dark:text-teal-50">
-            PEOPLE OF
-            <br />
-            BAYELSA
-          </span>
-        </Link>
-        <nav aria-label="Main navigation" className="hidden items-center gap-8 text-sm font-medium text-foreground/75 md:flex">
-          <a href="#discover" className="transition-colors hover:text-teal-700">Discover</a>
-          <Link to="/explore" className="transition-colors hover:text-teal-700">Explore</Link>
-          <Link to="/friends" className="transition-colors hover:text-teal-700">Community</Link>
-        </nav>
-        <div className="flex items-center gap-2">
-          <button
-            type="button"
-            onClick={onToggleTheme}
-            aria-label={isDarkMode ? 'Switch to light mode' : 'Switch to dark mode'}
-            title={isDarkMode ? 'Switch to light mode' : 'Switch to dark mode'}
-            className="grid size-10 place-items-center rounded-full border border-teal-900/10 text-teal-900 transition-colors hover:bg-teal-900/5 focus-visible:outline-2 focus-visible:outline-ring dark:border-white/10 dark:text-teal-100 dark:hover:bg-white/10"
-          >
-            {isDarkMode ? <Sun size={18} aria-hidden="true" /> : <Moon size={18} aria-hidden="true" />}
-          </button>
-          <Link
-            to="/home"
-            className="inline-flex items-center gap-2 rounded-full bg-teal-800 px-5 py-2.5 text-sm font-semibold text-white shadow-lg shadow-teal-900/15 transition hover:-translate-y-0.5 hover:bg-teal-700"
-          >
-            Open the feed <ArrowUpRight size={16} aria-hidden="true" />
+              {/* <Waves size={21} aria-hidden="true" /> */}
+            </div>
+            <span className="text-sm font-black leading-tight tracking-wide text-teal-950 dark:text-teal-50">
+              PEOPLE OF
+              <br />
+              BAYELSA
+            </span>
           </Link>
+          <nav aria-label="Main navigation" className="hidden items-center gap-8 text-sm font-medium text-foreground/75 md:flex">
+            <a href="#discover" className="transition-colors hover:text-teal-700">Discover</a>
+            <Link to="/explore" className="transition-colors hover:text-teal-700">Explore</Link>
+            <Link to="/friends" className="transition-colors hover:text-teal-700">Community</Link>
+          </nav>
+          <div className="flex items-center gap-2">
+            <button
+              type="button"
+              onClick={onToggleTheme}
+              aria-label={isDarkMode ? 'Switch to light mode' : 'Switch to dark mode'}
+              title={isDarkMode ? 'Switch to light mode' : 'Switch to dark mode'}
+              className="grid size-10 place-items-center rounded-full border border-teal-900/10 text-teal-900 hover:bg-teal-900/5 focus-visible:outline-2 focus-visible:outline-ring dark:border-white/10 dark:text-teal-100 dark:hover:bg-white/10 "
+            >
+              {isDarkMode ? <Sun size={18} aria-hidden="true" /> : <Moon size={18} aria-hidden="true" />}
+            </button>
+            <Link
+              to="/signin"
+              className="hidden items-center gap-2 rounded-full bg-teal-800 px-5 py-2.5 text-sm font-semibold text-white shadow-lg shadow-teal-900/15 transition hover:-translate-y-0.5 hover:bg-teal-700 md:inline-flex"
+            >
+              Sign In <ArrowUpRight size={16} aria-hidden="true" />
+            </Link>
+            <button
+              type="button"
+              onClick={() => setIsMenuOpen((open) => !open)}
+              aria-label={isMenuOpen ? 'Close navigation menu' : 'Open navigation menu'}
+              aria-expanded={isMenuOpen}
+              aria-controls="mobile-navigation"
+              className="grid size-10 place-items-center rounded-full border border-teal-900/10 text-teal-900 transition-all duration-200 hover:bg-teal-900/5 active:scale-90 focus-visible:outline-2 focus-visible:outline-ring dark:border-white/10 dark:text-teal-100 dark:hover:bg-white/10 md:hidden"
+            >
+              <span className={`transition-transform duration-200 ${isMenuOpen ? 'rotate-90 scale-90' : 'rotate-0 scale-100'}`}>
+                {isMenuOpen ? <X size={20} aria-hidden="true" /> : <Menu size={20} aria-hidden="true" />}
+              </span>
+            </button>
+          </div>
         </div>
+        {isMenuOpen && (
+          <nav
+            id="mobile-navigation"
+            aria-label="Mobile navigation"
+            className="mt-4 flex animate-in fade-in slide-in-from-top-2 flex-col gap-1 border-t border-teal-900/10 pt-3 text-sm font-medium text-foreground duration-200 dark:border-white/10 md:hidden"
+          >
+            <a
+              href="#discover"
+              onClick={() => setIsMenuOpen(false)}
+              className="rounded-lg px-3 py-3 transition-colors hover:bg-teal-900/5 dark:hover:bg-white/10"
+            >
+              Discover
+            </a>
+            <Link
+              to="/explore"
+              onClick={() => setIsMenuOpen(false)}
+              className="rounded-lg px-3 py-3 transition-colors hover:bg-teal-900/5 dark:hover:bg-white/10"
+            >
+              Explore
+            </Link>
+            <Link
+              to="/friends"
+              onClick={() => setIsMenuOpen(false)}
+              className="rounded-lg px-3 py-3 transition-colors hover:bg-teal-900/5 dark:hover:bg-white/10"
+            >
+              Community
+            </Link>
+            <Link
+              to="/signin"
+              onClick={() => setIsMenuOpen(false)}
+              className="mt-1 inline-flex items-center justify-center gap-2 rounded-full bg-teal-800 px-5 py-3 font-semibold text-white shadow-lg shadow-teal-900/15 transition hover:bg-teal-700"
+            >
+              Sign in <ArrowUpRight size={16} aria-hidden="true" />
+            </Link>
+          </nav>
+        )}
       </header>
 
       <section className="mx-auto grid max-w-7xl items-center gap-10 px-5 pb-16 pt-8 sm:px-8 md:grid-cols-[1.02fr_0.98fr] md:gap-14 md:pb-24 md:pt-14">
         <div className="relative z-10">
-          <span className="mb-6 inline-flex items-center gap-2 rounded-full border border-teal-800/10 bg-white/80 px-4 py-2 text-sm font-medium text-teal-900 shadow-sm dark:bg-white/10 dark:text-teal-100">
+          {/* <span className="mb-6 inline-flex items-center gap-2 rounded-full border border-teal-800/10 bg-white/80 px-4 py-2 text-sm font-medium text-teal-900 shadow-sm dark:bg-white/10 dark:text-teal-100">
             <MapPin size={15} aria-hidden="true" />
             Made for the people of Bayelsa
-          </span>
+          </span> */}
           <h1 className="max-w-2xl text-5xl font-black leading-[1.04] tracking-tight text-teal-950 dark:text-white sm:text-6xl lg:text-7xl">
             Our people.
             <br />
@@ -133,7 +187,7 @@ function Landing({ isDarkMode, onToggleTheme }) {
               to="/home"
               className="inline-flex items-center gap-2 rounded-full bg-teal-700 px-6 py-3.5 font-semibold text-white shadow-xl shadow-teal-900/20 transition hover:-translate-y-0.5 hover:bg-teal-600"
             >
-              Find your community <ArrowRight size={18} aria-hidden="true" />
+              Explore Community <ArrowRight size={18} aria-hidden="true" />
             </Link>
             <a
               href="#discover"
@@ -157,7 +211,7 @@ function Landing({ isDarkMode, onToggleTheme }) {
           <div className="relative h-97.5 overflow-hidden rounded-[2rem] shadow-2xl shadow-teal-950/20 sm:h-122.5">
             <img
               src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQzpV-o-K8XqMbJJg7ItLylh-iXAxsuxz8KCRIPWUZkXg&s=10"
-              alt="Sunlight dancing across a tropical waterside"
+              alt="image of tombia round-about, Yenagoa"
               className="h-full w-full "
             />
             <div className="absolute inset-0 bg-linear-to-t from-teal-950/75 via-teal-950/5 to-transparent" />
@@ -174,7 +228,7 @@ function Landing({ isDarkMode, onToggleTheme }) {
               </p>
             </div>
           </div>
-          <div className="absolute -bottom-5 -left-3 flex items-center gap-3 rounded-2xl border border-white/70 bg-white p-4 shadow-xl dark:border-white/10 dark:bg-slate-900 sm:-left-8">
+          {/* <div className="absolute -bottom-5 -left-3 flex items-center gap-3 rounded-2xl border border-white/70 bg-white p-4 shadow-xl dark:border-white/10 dark:bg-slate-900 sm:-left-8">
             <span className="grid size-11 place-items-center rounded-xl bg-teal-100 text-teal-800 dark:bg-teal-900 dark:text-teal-200">
               <Users size={21} aria-hidden="true" />
             </span>
@@ -182,7 +236,7 @@ function Landing({ isDarkMode, onToggleTheme }) {
               <span className="block text-sm font-bold text-slate-900 dark:text-white">Your community</span>
               <span className="block text-xs text-slate-500 dark:text-slate-400">Starts right here</span>
             </span>
-          </div>
+          </div> */}
         </div>
       </section>
 

@@ -48,13 +48,13 @@ function Faq() {
             Learn how People of Bayelsa can help you discover and connect with
             your community.
           </p>
-          <Link
+          {/* <Link
             to="/explore"
             className="mt-6 inline-flex items-center gap-2 font-semibold text-teal-800 transition-colors hover:text-teal-600 dark:text-teal-200 dark:hover:text-teal-100"
           >
             Explore the community
             <span aria-hidden="true">→</span>
-          </Link>
+          </Link> */}
         </div>
 
         <div className="rounded-3xl border border-teal-900/10 bg-white p-5 shadow-xl shadow-teal-950/5 dark:border-white/10 dark:bg-slate-900 sm:p-8">
